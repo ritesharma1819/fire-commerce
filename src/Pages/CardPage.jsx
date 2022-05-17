@@ -1,8 +1,11 @@
 import React from 'react'
+import Layout from '../Component/Layout'
 
 function CardPage() {
   return (
-    <div>CardPage</div>
+    <Layout>
+      CardPage
+    </Layout>
   )
 }
 

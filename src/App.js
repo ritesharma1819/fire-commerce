@@ -1,12 +1,22 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.css';
+import CardPage from './Pages/CardPage';
+import HomePage from './Pages/HomePage';
+import LogInPage from './Pages/LogInPage'
+import RegisterPage from './Pages/RegisterPage'
+import ProductInfoPage from './Pages/ProductInfoPage';
 
 function App() {
   return (
-    <div className="App">
-      <h1>happy shoppy </h1>
-      <button className='btn btn-primary'>click me</button>
-     
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/login' element={<LogInPage />} />
+      <Route path='/register' element={<RegisterPage />} />
+      <Route path='/card' element={<CardPage />} />
+      <Route path='/product' element={<ProductInfoPage />} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 
