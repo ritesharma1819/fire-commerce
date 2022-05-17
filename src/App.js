@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage';
 import LogInPage from './Pages/LogInPage'
 import RegisterPage from './Pages/RegisterPage'
 import ProductInfoPage from './Pages/ProductInfoPage';
+import './StyleSheet/Layout.css'
 
 function App() {
   return (
