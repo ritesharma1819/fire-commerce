@@ -1,27 +1,32 @@
 import React from 'react'
 import Layout from '../Component/Layout'
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, getDocs } from "firebase/firestore"; 
 import { db } from '../firebase';
 
 function HomePage() {
-  const addData =async ()=>{
+  const getProduct=async()=>{
     try{
-       await addDoc(collection(db,"user"), {
-         name: 'jellu' , 
-         age: '25'
-        })
+      const user= await getDocs(collection(db,'products'));
+      const productArray=[];
+      user.forEach((doc)=>{
+        const obj ={
+          id: doc.id,
+          ...doc.data(),
+        };
+        productArray.push(obj)
+        console.log(productArray)
+      })
     }
     catch(error){
       console.log(error)
     }
   }
-  
 
   return (
     <Layout>
       <h1>home</h1>
 
-      <button onClick={addData}>add to firebase</button>
+      <button onClick={getProduct}>get from firebase</button>
      
     </Layout>
   )
