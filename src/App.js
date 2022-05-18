@@ -6,6 +6,7 @@ import LogInPage from './Pages/LogInPage'
 import RegisterPage from './Pages/RegisterPage'
 import ProductInfoPage from './Pages/ProductInfoPage';
 import './StyleSheet/Layout.css'
+import './StyleSheet/HomePage.css'
 
 function App() {
   return (
