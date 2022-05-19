@@ -35,8 +35,21 @@ function HomePage() {
             return (
               <div key={i} className="col-md-4 text-center ">
                 <div className="m-2 p-1 product">
-                  <p>{product.name}</p>
-                  <img className="product_img" src={product.imageUrl} alt="" />
+                  <div className="product_content">
+                    <p>{product.name}</p>
+                    <img
+                      className="product_img"
+                      src={product.imageUrl}
+                      alt=""
+                    />
+                  </div>
+                  <div className="product_action">
+                    <h3>{product.price} RS/-</h3>
+                    <div>
+                      <button className="mx-1">ADD TO CART</button>
+                      <button>VIEW</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             );

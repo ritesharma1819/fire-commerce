@@ -9,3 +9,13 @@
 .nav-link{
     color: white;
 }
+
+button{
+    background-color: #003F5C;
+    color: white;
+    border: 1px solid white;
+}
+
+button:hover{
+    background-color: tomato;
+}

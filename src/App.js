@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import LogInPage from "./pages/LogInPage";
 import ProductInfoPage from "./pages/ProductInfoPage";
 import RegisterPage from "./pages/RegisterPage";
-import "./stylesheet/HomePage.css";
+import "./stylesheet/Product.css";
 import "./stylesheet/Layout.css";
 
 function App() {
