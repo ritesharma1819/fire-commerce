@@ -1,12 +1,8 @@
-import React from 'react'
-import Layout from '../Component/Layout'
+import React from "react";
+import Layout from "../component/Layout";
 
-function CardPage() {
-  return (
-    <Layout>
-      CardPage
-    </Layout>
-  )
-}
+const CardPage = () => {
+  return <Layout>CardPage</Layout>;
+};
 
-export default CardPage
+export default CardPage;
