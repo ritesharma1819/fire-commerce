@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Layout from "../component/Layout";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [product, setProduct] = useState([]);
+  const navigate = useNavigate();
 
   const getProduct = async () => {
     try {
@@ -47,7 +49,13 @@ function HomePage() {
                     <h3>{product.price} RS/-</h3>
                     <div>
                       <button className="mx-1">ADD TO CART</button>
-                      <button>VIEW</button>
+                      <button
+                        onClick={() => {
+                          navigate(`/product/${product.id}`);
+                        }}
+                      >
+                        VIEW
+                      </button>
                     </div>
                   </div>
                 </div>
