@@ -1,4 +1,5 @@
 import React from "react";
+import { FaCartPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AiOutlineBars } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -44,8 +45,8 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Cart {cartItem.length}
+                <Link className="nav-link" to="/cart">
+                  <FaCartPlus /> {cartItem.length}
                 </Link>
               </li>
             </ul>
