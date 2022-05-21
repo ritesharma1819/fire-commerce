@@ -21,6 +21,7 @@ function ProductInfoPage() {
 
   useEffect(() => {
     getProductInfo();
+    // eslint-disable-next-line
   }, []);
 
   return (

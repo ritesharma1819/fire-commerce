@@ -3,12 +3,12 @@ import Layout from "../component/Layout";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 function HomePage() {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const { cartItem } = useSelector((state) => state.CartReducer);
 
   const getProduct = async () => {
@@ -28,15 +28,13 @@ function HomePage() {
     }
   };
 
-  
   const addtocart = (product) => {
-    dispatch({type: 'ADD_TO_CART' , payload:product})
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
-  
-  useEffect(()=>{
-    localStorage.setItem('cartItem' , JSON.stringify(cartItem))
-  },[cartItem])
 
+  useEffect(() => {
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+  }, [cartItem]);
 
   useEffect(() => {
     getProduct();
@@ -63,9 +61,7 @@ function HomePage() {
                     <div>
                       <button
                         className="mx-1"
-                        onClick={() => {
-                          addtocart(product);
-                        }}
+                        onClick={() => addtocart(product)}
                       >
                         ADD TO CART
                       </button>

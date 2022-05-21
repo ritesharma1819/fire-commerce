@@ -4,7 +4,7 @@ import { RootReducer } from "./RootReducer";
 
 const composeEnhancers = composeWithDevTools({});
 const intialStorage = {
-  cartReducer: {
+  CartReducer: {
     cartItem: JSON.parse(localStorage.getItem("cartItem")) ?? [],
   },
 };

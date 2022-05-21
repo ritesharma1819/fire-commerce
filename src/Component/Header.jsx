@@ -4,7 +4,7 @@ import { AiOutlineBars } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const { cartItem } = useSelector(state => state.CartReducer);
+  const { cartItem } = useSelector((state) => state.CartReducer);
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
