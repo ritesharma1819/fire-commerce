@@ -25,6 +25,8 @@ function HomePage() {
     }
   };
 
+  const addtocart = (product) => {};
+
   useEffect(() => {
     getProduct();
   }, []);
@@ -48,7 +50,14 @@ function HomePage() {
                   <div className="product_action">
                     <h3>{product.price} RS/-</h3>
                     <div>
-                      <button className="mx-1">ADD TO CART</button>
+                      <button
+                        className="mx-1"
+                        onClick={() => {
+                          addtocart(product);
+                        }}
+                      >
+                        ADD TO CART
+                      </button>
                       <button
                         onClick={() => {
                           navigate(`/product/${product.id}`);
