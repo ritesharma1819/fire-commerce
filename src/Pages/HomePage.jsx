@@ -3,10 +3,13 @@ import Layout from "../component/Layout";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
 
 function HomePage() {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
+  const { cartItem } = useSelector((state) => state.CartReducer);
 
   const getProduct = async () => {
     try {
@@ -25,7 +28,15 @@ function HomePage() {
     }
   };
 
-  const addtocart = (product) => {};
+  
+  const addtocart = (product) => {
+    dispatch({type: 'ADD_TO_CART' , payload:product})
+  };
+  
+  useEffect(()=>{
+    localStorage.setItem('cartItem' , JSON.stringify(cartItem))
+  },[cartItem])
+
 
   useEffect(() => {
     getProduct();
