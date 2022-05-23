@@ -6,6 +6,7 @@ import ProductInfoPage from "./pages/ProductInfoPage";
 import RegisterPage from "./pages/RegisterPage";
 import "./stylesheet/Product.css";
 import "./stylesheet/Layout.css";
+import "./stylesheet/authentication.css";
 
 function App() {
   return (
