@@ -2,11 +2,22 @@ import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Layout from "../component/Layout";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
 
 const CardPage = () => {
   const { cartItem } = useSelector((state) => state.CartReducer);
+  const { register, handleSubmit } = useForm();
   const [totalAmount, setTotalAmount] = useState(0);
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const placeorderSubmit = (data) => {
+    console.log(data);
+  };
 
   const deletefromcart = (item) => {
     dispatch({ type: "DELETE_FROM_CART", payload: item });
@@ -62,8 +73,42 @@ const CardPage = () => {
         </h1>
       </div>
       <div className="d-flex justify-content-end mt-2">
-        <button>Place order</button>
+        <button onClick={handleShow}>Place order</button>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Address</Modal.Title>
+        </Modal.Header>
+        <form onSubmit={handleSubmit(placeorderSubmit)}>
+          <Modal.Body>
+            <div className="d-flex flex-column gap-2">
+              <input type="text" placeholder="Name" {...register("name")} />
+              <input
+                type="text"
+                placeholder="Address"
+                {...register("address")}
+              />
+              <input
+                type="number"
+                placeholder="Pin Code"
+                {...register("pCode")}
+              />
+              <input
+                type="number"
+                placeholder="Phone Number"
+                {...register("pNumber")}
+              />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={handleClose}>Close</button>
+            <button type="submit" onClick={handleClose}>
+              Order
+            </button>
+          </Modal.Footer>
+        </form>
+      </Modal>
     </Layout>
   );
 };
