@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function RegisterPage() {
   return (
@@ -22,7 +22,7 @@ function RegisterPage() {
               <input type="email" placeholder="Email" />
               <input type="password" placeholder="Password" />
               <button>Register</button>
-              <Link to='/login'>Click Here For Login</Link>
+              <Link to="/login">Click Here For Login</Link>
             </div>
           </div>
         </div>

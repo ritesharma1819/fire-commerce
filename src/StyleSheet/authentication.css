@@ -1,3 +1,5 @@
+/* styling for register page  */
+
 .register_parent {
   display: flex;
   justify-content: center;
@@ -17,5 +19,29 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   height: 250px;
+  background-color: white;
+}
+
+/* styling for login page  */
+
+.login_parent {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  background-color: aliceblue;
+}
+
+.login_input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.login_fields {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  height: 230px;
   background-color: white;
 }
