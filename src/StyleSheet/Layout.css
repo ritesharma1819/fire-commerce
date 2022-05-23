@@ -1,21 +1,33 @@
-.navbar{
-   background-color: #003F5C !important;
+.navbar {
+  background-color: #003f5c !important;
 }
 
-.navbar-brand{
-    color: white;
+.navbar-brand {
+  color: white;
 }
 
-.nav-link{
-    color: white;
+.nav-link {
+  color: white;
 }
 
-button{
-    background-color: #003F5C;
-    color: white;
-    border: 1px solid white;
+button {
+  background-color: #003f5c;
+  color: white;
+  border: 1px solid white;
 }
 
-button:hover{
-    background-color: tomato;
+button:hover {
+  background-color: tomato;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-border {
+  height: 100px;
+  width: 100px;
 }

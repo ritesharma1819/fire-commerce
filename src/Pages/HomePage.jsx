@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 function HomePage() {
   const [product, setProduct] = useState([]);
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartItem } = useSelector((state) => state.CartReducer);
 
   const getProduct = async () => {
     try {
+      setLoader(true);
       const user = await getDocs(collection(db, "products"));
       const productArray = [];
       user.forEach((doc) => {
@@ -23,8 +25,10 @@ function HomePage() {
         productArray.push(obj);
       });
       setProduct(productArray);
+      setLoader(false);
     } catch (error) {
       console.log(error);
+      setLoader(false);
     }
   };
 
@@ -41,7 +45,7 @@ function HomePage() {
   }, []);
 
   return (
-    <Layout>
+    <Layout loader={loader}>
       <div className="container">
         <div className="row">
           {product.map((product, i) => {

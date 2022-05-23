@@ -6,16 +6,21 @@ import { useParams } from "react-router-dom";
 
 function ProductInfoPage() {
   const [productData, setProductData] = useState();
+  const [loader, setLoader] = useState(false);
+
   const prams = useParams();
 
   const getProductInfo = async () => {
     try {
+      setLoader(true);
       const productInfo = await getDoc(doc(db, "products", prams.id));
       console.log(productInfo.data());
 
       setProductData(productInfo.data());
+      setLoader(false);
     } catch (error) {
       console.log(error);
+      setLoader(false);
     }
   };
 
@@ -25,7 +30,7 @@ function ProductInfoPage() {
   }, []);
 
   return (
-    <Layout>
+    <Layout loader={loader}>
       <div className="container my-3">
         <div className="row justify-content-center">
           <div className="col-md-8">
