@@ -33,3 +33,9 @@
 .productInfo_img {
   height: 70vh;
 }
+.cartPage_totalamount {
+  background-color: #d2b48c;
+  padding: 10px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
