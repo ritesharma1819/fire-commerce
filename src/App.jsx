@@ -7,18 +7,23 @@ import RegisterPage from "./pages/RegisterPage";
 import "./stylesheet/Product.css";
 import "./stylesheet/Layout.css";
 import "./stylesheet/authentication.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LogInPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/cart" element={<CardPage />} />
-        <Route path="/product/:id" element={<ProductInfoPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LogInPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/cart" element={<CardPage />} />
+          <Route path="/product/:id" element={<ProductInfoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const { cartItem } = useSelector((state) => state.CartReducer);
+  const user = JSON.parse(localStorage.getItem("currentUser"));
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -31,7 +32,7 @@ function Header() {
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
                 <Link className="nav-link " aria-current="page" to="/">
-                  user
+                  {user}
                 </Link>
               </li>
               <li className="nav-item">

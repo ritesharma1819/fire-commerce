@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Loader from "../component/Loader";
+import { toast } from "react-toastify";
 
 function RegisterPage() {
   const { register, handleSubmit } = useForm();
@@ -14,11 +15,14 @@ function RegisterPage() {
     try {
       setLoader(true);
       await createUserWithEmailAndPassword(auth, data.email, data.password);
-      alert("registion successful");
+      const user = data.username;
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      toast.success("Registration successfull");
       setLoader(false);
+      window.location.href = "/";
     } catch (error) {
       console.log(error);
-      alert("registion failed");
+      toast.error("Registration failed");
       setLoader(false);
     }
   };

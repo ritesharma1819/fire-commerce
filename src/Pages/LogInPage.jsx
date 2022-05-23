@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Loader from "../component/Loader";
+import { toast } from "react-toastify";
 
 function LogInPage() {
   const { register, handleSubmit } = useForm();
@@ -14,11 +15,12 @@ function LogInPage() {
     try {
       setLoader(true);
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      alert("login successful");
+      toast.success("Login successful");
       setLoader(false);
+      window.location.href = "/";
     } catch (error) {
       console.log(error);
-      alert("login failed");
+      toast.error("Login failed");
       setLoader(false);
     }
   };
