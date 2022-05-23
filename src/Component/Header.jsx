@@ -6,7 +6,12 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const { cartItem } = useSelector((state) => state.CartReducer);
-  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const user = JSON.parse(localStorage.getItem("username"));
+
+  const logOut = () => {
+    localStorage.removeItem("currentUser");
+    window.location.reload();
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
@@ -41,7 +46,7 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/" onClick={logOut}>
                   LogOut
                 </Link>
               </li>

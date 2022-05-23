@@ -14,7 +14,12 @@ function LogInPage() {
     console.log(data);
     try {
       setLoader(true);
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      const result = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      localStorage.setItem("currentUser", JSON.stringify(result));
       toast.success("Login successful");
       setLoader(false);
       window.location.href = "/";

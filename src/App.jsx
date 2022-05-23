@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import CardPage from "./pages/CardPage";
 import HomePage from "./pages/HomePage";
 import LogInPage from "./pages/LogInPage";
@@ -16,11 +16,32 @@ function App() {
       <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoutes>
+                <HomePage />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoutes>
+                <CardPage />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoutes>
+                <ProductInfoPage />
+              </ProtectedRoutes>
+            }
+          />
           <Route path="/login" element={<LogInPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/cart" element={<CardPage />} />
-          <Route path="/product/:id" element={<ProductInfoPage />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -28,3 +49,11 @@ function App() {
 }
 
 export default App;
+
+export const ProtectedRoutes = ({ children }) => {
+  if (localStorage.getItem("currentUser")) {
+    return children;
+  } else {
+    return <Navigate to="/login" />;
+  }
+};

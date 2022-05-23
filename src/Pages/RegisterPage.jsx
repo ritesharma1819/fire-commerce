@@ -15,8 +15,8 @@ function RegisterPage() {
     try {
       setLoader(true);
       await createUserWithEmailAndPassword(auth, data.email, data.password);
-      const user = data.username;
-      localStorage.setItem("currentUser", JSON.stringify(user));
+      const usernameData = data.username;
+      localStorage.setItem("username", JSON.stringify(usernameData));
       toast.success("Registration successfull");
       setLoader(false);
       window.location.href = "/";
