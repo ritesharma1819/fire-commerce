@@ -10,6 +10,7 @@ import "./stylesheet/authentication.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OrderPage from "./pages/OrderPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
             element={
               <ProtectedRoutes>
                 <OrderPage />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoutes>
+                <AdminPage />
               </ProtectedRoutes>
             }
           />
