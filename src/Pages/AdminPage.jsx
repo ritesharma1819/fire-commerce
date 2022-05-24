@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { collection, getDocs } from "firebase/firestore";
+import { Modal } from "react-bootstrap";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Layout from "../component/Layout";
+import { toast } from "react-toastify";
 
 const AdminPage = () => {
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [product, setProduct] = useState({
+    name: "",
+    imageUrl: "",
+    category: "",
+    price: 0,
+  });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getProduct = async () => {
     try {
@@ -20,10 +32,29 @@ const AdminPage = () => {
         };
         productArray.push(obj);
       });
-      setProduct(productArray);
+      setProducts(productArray);
       setLoader(false);
     } catch (error) {
       console.log(error);
+      setLoader(false);
+    }
+  };
+
+  const editHandler = (item) => {
+    handleShow();
+    setProduct(item);
+  };
+
+  const updateData = async () => {
+    try {
+      setLoader(true);
+      await setDoc(doc(db, "products", product.id), product);
+      getProduct();
+      toast.success("Upadted successfully");
+      handleClose();
+      setLoader(false);
+    } catch (error) {
+      toast.error("Upadte failed");
       setLoader(false);
     }
   };
@@ -39,27 +70,74 @@ const AdminPage = () => {
           <tr>
             <th>Image</th>
             <th>Name</th>
+            <th>Category</th>
             <th>Price</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {product.map((item, i) => {
+          {products.map((item, i) => {
             return (
               <tr key={i}>
                 <td>
                   <img src={item.imageUrl} alt="" height="80" />
                 </td>
                 <td>{item.name}</td>
+                <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td style={{ cursor: "pointer" }}>
-                  <FaTrash /> <FaEdit />{" "}
+                  <FaTrash /> <FaEdit onClick={() => editHandler(item)} />{" "}
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex flex-column gap-2">
+            <input
+              type="text"
+              placeholder="Name"
+              value={product.name}
+              onChange={(e) => setProduct({ ...product, name: e.target.value })}
+            />
+            <input
+              type="text"
+              value={product.description}
+              placeholder="Description"
+              onChange={(e) =>
+                setProduct({ ...product, description: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="price"
+              value={product.price}
+              onChange={(e) =>
+                setProduct({ ...product, price: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Category"
+              value={product.category}
+              onChange={(e) =>
+                setProduct({ ...product, category: e.target.value })
+              }
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose}>Close</button>
+          <button type="submit" onClick={updateData}>
+            Save
+          </button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
   );
 };
