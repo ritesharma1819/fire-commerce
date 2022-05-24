@@ -3,10 +3,13 @@ import Layout from "../component/Layout";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductInfoPage() {
   const [productData, setProductData] = useState();
   const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
+  const { cartItem } = useSelector((state) => state.CartReducer);
 
   const prams = useParams();
 
@@ -14,7 +17,6 @@ function ProductInfoPage() {
     try {
       setLoader(true);
       const productInfo = await getDoc(doc(db, "products", prams.id));
-      console.log(productInfo.data());
 
       setProductData(productInfo.data());
       setLoader(false);
@@ -23,6 +25,14 @@ function ProductInfoPage() {
       setLoader(false);
     }
   };
+
+  const addtocart = (productData) => {
+    dispatch({ type: "ADD_TO_CART", payload: productData });
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+  }, [cartItem]);
 
   useEffect(() => {
     getProductInfo();
@@ -47,7 +57,9 @@ function ProductInfoPage() {
                 <hr />
                 <p>{productData.description}</p>
                 <div className="d-flex justify-content-end ">
-                  <button>ADD TO CART</button>
+                  <button onClick={() => addtocart(productData)}>
+                    ADD TO CART
+                  </button>
                 </div>
               </div>
             )}
