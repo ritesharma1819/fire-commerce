@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
-import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Layout from "../component/Layout";
 import { toast } from "react-toastify";
@@ -52,7 +59,7 @@ const AdminPage = () => {
       await setDoc(doc(db, "products", product.id), product);
       getProduct();
       toast.success("Upadted successfully");
-      window.location.reload()
+      window.location.reload();
       setLoader(false);
     } catch (error) {
       toast.error("Upadte failed");
@@ -64,7 +71,7 @@ const AdminPage = () => {
       setLoader(true);
       await addDoc(collection(db, "products"), product);
       toast.success("Add successfully");
-      window.location.reload()
+      window.location.reload();
       handleClose();
       setLoader(false);
     } catch (error) {
@@ -73,6 +80,18 @@ const AdminPage = () => {
     }
   };
 
+  const deleteProduct = async (item) => {
+    try {
+      setLoader(true);
+      await deleteDoc(doc(db, "products", item.id));
+      toast.success("Product deleted successfully");
+      getProduct();
+      setLoader(false);
+    } catch (error) {
+      toast.error("Product deleted failed");
+      setLoader(false);
+    }
+  };
 
   const addHandler = () => {
     setAdd(true);
@@ -110,7 +129,8 @@ const AdminPage = () => {
                 <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td style={{ cursor: "pointer" }}>
-                  <FaTrash /> <FaEdit onClick={() => editHandler(item)} />{" "}
+                  <FaTrash onClick={() => deleteProduct(item)} />{" "}
+                  <FaEdit onClick={() => editHandler(item)} />{" "}
                 </td>
               </tr>
             );
@@ -119,9 +139,7 @@ const AdminPage = () => {
       </table>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {add  ? "Add Product" : "Edit Product"}
-          </Modal.Title>
+          <Modal.Title>{add ? "Add Product" : "Edit Product"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="d-flex flex-column gap-2">
@@ -135,7 +153,9 @@ const AdminPage = () => {
               type="text"
               placeholder="ImageUrl"
               value={product.imageUrl}
-              onChange={(e) => setProduct({ ...product, imageUrl: e.target.value })}
+              onChange={(e) =>
+                setProduct({ ...product, imageUrl: e.target.value })
+              }
             />
             <input
               type="text"
@@ -165,11 +185,15 @@ const AdminPage = () => {
         </Modal.Body>
         <Modal.Footer>
           <button onClick={handleClose}>Close</button>
-          {add ? <button type="submit" onClick={addData}>
-            Add
-          </button> : <button type="submit" onClick={updateData}>
-            Save
-          </button>}
+          {add ? (
+            <button type="submit" onClick={addData}>
+              Add
+            </button>
+          ) : (
+            <button type="submit" onClick={updateData}>
+              Save
+            </button>
+          )}
         </Modal.Footer>
       </Modal>
     </Layout>
