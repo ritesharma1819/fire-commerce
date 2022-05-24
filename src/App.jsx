@@ -9,6 +9,7 @@ import "./stylesheet/Layout.css";
 import "./stylesheet/authentication.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
   return (
@@ -29,6 +30,14 @@ function App() {
             element={
               <ProtectedRoutes>
                 <CardPage />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <ProtectedRoutes>
+                <OrderPage />
               </ProtectedRoutes>
             }
           />
