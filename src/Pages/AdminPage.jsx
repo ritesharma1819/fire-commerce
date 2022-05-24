@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import Layout from "../component/Layout";
 import { toast } from "react-toastify";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 const AdminPage = () => {
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [add, setAdd] = useState(false);
   const [product, setProduct] = useState({
     name: "",
     imageUrl: "",
@@ -51,12 +52,31 @@ const AdminPage = () => {
       await setDoc(doc(db, "products", product.id), product);
       getProduct();
       toast.success("Upadted successfully");
-      handleClose();
+      window.location.reload()
       setLoader(false);
     } catch (error) {
       toast.error("Upadte failed");
       setLoader(false);
     }
+  };
+  const addData = async () => {
+    try {
+      setLoader(true);
+      await addDoc(collection(db, "products"), product);
+      toast.success("Add successfully");
+      window.location.reload()
+      handleClose();
+      setLoader(false);
+    } catch (error) {
+      toast.error("Add failed");
+      setLoader(false);
+    }
+  };
+
+
+  const addHandler = () => {
+    setAdd(true);
+    handleShow();
   };
 
   useEffect(() => {
@@ -64,7 +84,11 @@ const AdminPage = () => {
   }, []);
   return (
     <Layout loader={loader}>
-      <h3 className="mt-2">Products List</h3>
+      <div className="d-flex justify-content-between mx-2 my-2">
+        <h3 className="mt-2">Products List</h3>
+        <button onClick={addHandler}>Add Product</button>
+      </div>
+
       <table className="table mt-3">
         <thead>
           <tr>
@@ -95,7 +119,9 @@ const AdminPage = () => {
       </table>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Address</Modal.Title>
+          <Modal.Title>
+            {add  ? "Add Product" : "Edit Product"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="d-flex flex-column gap-2">
@@ -104,6 +130,12 @@ const AdminPage = () => {
               placeholder="Name"
               value={product.name}
               onChange={(e) => setProduct({ ...product, name: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="ImageUrl"
+              value={product.imageUrl}
+              onChange={(e) => setProduct({ ...product, imageUrl: e.target.value })}
             />
             <input
               type="text"
@@ -133,9 +165,11 @@ const AdminPage = () => {
         </Modal.Body>
         <Modal.Footer>
           <button onClick={handleClose}>Close</button>
-          <button type="submit" onClick={updateData}>
+          {add ? <button type="submit" onClick={addData}>
+            Add
+          </button> : <button type="submit" onClick={updateData}>
             Save
-          </button>
+          </button>}
         </Modal.Footer>
       </Modal>
     </Layout>
