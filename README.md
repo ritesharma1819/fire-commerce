@@ -4,6 +4,7 @@
 - React.js
 - React Router
 - Redux
+- Firebase
 - Javascript
 - HTML
 - CSS
