@@ -4,19 +4,38 @@ import Layout from "../component/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../utils/firebase";
+import { toast } from "react-toastify";
 
 const CardPage = () => {
   const { cartItem } = useSelector((state) => state.CartReducer);
   const { register, handleSubmit } = useForm();
   const [totalAmount, setTotalAmount] = useState(0);
+  const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const placeorderSubmit = (data) => {
-    console.log(data);
+  const placeorderSubmit = async (data) => {
+    const addressInfo = data;
+    const orderInfo = {
+      cartItem,
+      addressInfo,
+      email: JSON.parse(localStorage.getItem("currentUser")).user.email,
+      uderId: JSON.parse(localStorage.getItem("currentUser")).user.uid,
+    };
+    try {
+      setLoader(true);
+      await addDoc(collection(db, "orders"), orderInfo);
+      toast.success("Order placed successfully");
+      setLoader(false);
+    } catch (error) {
+      toast.error("Order placed failed");
+      setLoader(false);
+    }
   };
 
   const deletefromcart = (item) => {
@@ -36,7 +55,7 @@ const CardPage = () => {
   }, [cartItem]);
 
   return (
-    <Layout>
+    <Layout loader={loader}>
       <table className="table mt-3">
         <thead>
           <tr>
