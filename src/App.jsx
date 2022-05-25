@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AdminPage from "./pages/AdminPage";
 import CardPage from "./pages/CardPage";
 import HomePage from "./pages/HomePage";
 import LogInPage from "./pages/LogInPage";
+import OrderPage from "./pages/OrderPage";
 import ProductInfoPage from "./pages/ProductInfoPage";
 import RegisterPage from "./pages/RegisterPage";
-import "./stylesheet/Product.css";
-import "./stylesheet/Layout.css";
-import "./stylesheet/authentication.css";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import OrderPage from "./pages/OrderPage";
-import AdminPage from "./pages/AdminPage";
+import "./styleSheet/authentication.css";
+import "./styleSheet/Layout.css";
+import "./styleSheet/Product.css";
 
 function App() {
   return (
