@@ -1,6 +1,6 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore'
-import 'firebase/compat/auth'
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJOdZiuRY_CHkf-9I5sCY0181igToIbMA",
@@ -9,11 +9,11 @@ const firebaseConfig = {
   storageBucket: "firecommerce-cfa90.appspot.com",
   messagingSenderId: "262357503049",
   appId: "1:262357503049:web:799fc6f4594f3b793b8398",
-  measurementId: "G-J9BR8JR9TJ"
+  measurementId: "G-J9BR8JR9TJ",
 };
 
- firebase.initializeApp(firebaseConfig);
- const db= firebase.firestore()
- const auth = firebase.auth()
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
- export {db , auth}
+export { db, auth };

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Layout from "../component/Layout";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../utils/firebase";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Layout from "../../component/Layout";
+import { db } from "../../utils/firebase";
 
-function ProductInfoPage() {
+const ProductInfoPage = () => {
   const [productData, setProductData] = useState();
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
@@ -68,6 +68,6 @@ function ProductInfoPage() {
       </div>
     </Layout>
   );
-}
+};
 
 export default ProductInfoPage;

@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
-import { Modal } from "react-bootstrap";
 import {
   addDoc,
   collection,
@@ -9,9 +6,12 @@ import {
   getDocs,
   setDoc,
 } from "firebase/firestore";
-import { db } from "../utils/firebase";
-import Layout from "../component/Layout";
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import Layout from "../../component/Layout";
+import { db } from "../../utils/firebase";
 
 const AdminPage = () => {
   const [products, setProducts] = useState([]);

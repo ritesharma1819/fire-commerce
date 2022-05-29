@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../component/Layout";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import React, { useEffect, useState } from "react";
+import Layout from "../../component/Layout";
+import { db } from "../../utils/firebase";
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);

@@ -1,10 +1,10 @@
 import React from "react";
-import { FaCartPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { AiOutlineBars } from "react-icons/ai";
+import { FaCartPlus } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-function Header() {
+const Header = () => {
   const { cartItem } = useSelector((state) => state.CartReducer);
   const user = JSON.parse(localStorage.getItem("username"));
 
@@ -61,6 +61,6 @@ function Header() {
       </nav>
     </div>
   );
-}
+};
 
 export default Header;

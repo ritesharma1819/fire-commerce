@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa";
-import Layout from "../component/Layout";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import { Modal } from "react-bootstrap";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Layout from "../../component/Layout";
+import { db } from "../../utils/firebase";
 
-const CardPage = () => {
+const CartPage = () => {
   const { cartItem } = useSelector((state) => state.CartReducer);
   const { register, handleSubmit } = useForm();
   const [totalAmount, setTotalAmount] = useState(0);
@@ -132,4 +132,4 @@ const CardPage = () => {
   );
 };
 
-export default CardPage;
+export default CartPage;

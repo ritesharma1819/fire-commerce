@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "./Header";
-import Loader from "./Loader";
+import Header from "../Header";
+import Loader from "../Loader";
 
-function Layout(props) {
+const Layout = (props) => {
   return (
     <div>
       {props.loader && <Loader />}
@@ -10,6 +10,6 @@ function Layout(props) {
       <div className="content">{props.children}</div>
     </div>
   );
-}
+};
 
 export default Layout;

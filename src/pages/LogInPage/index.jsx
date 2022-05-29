@@ -1,33 +1,35 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import Loader from "../component/Loader";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loader from "../../component/Loader";
 
-function RegisterPage() {
+const LogInPage = () => {
   const { register, handleSubmit } = useForm();
   const [loader, setLoader] = useState(false);
   const auth = getAuth();
 
-  const registerSubmit = async (data) => {
-    console.log(data);
+  const loginSubmit = async (data) => {
     try {
       setLoader(true);
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
-      const usernameData = data.username;
-      localStorage.setItem("username", JSON.stringify(usernameData));
-      toast.success("Registration successfull");
+      const result = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      localStorage.setItem("currentUser", JSON.stringify(result));
+      toast.success("Login successful");
       setLoader(false);
       window.location.href = "/";
     } catch (error) {
       console.log(error);
-      toast.error("Registration failed");
+      toast.error("Login failed");
       setLoader(false);
     }
   };
   return (
-    <div className="register_parent">
+    <div className="login_parent">
       {loader && <Loader />}
       <div className="row">
         <div className="col-md-6">
@@ -40,15 +42,10 @@ function RegisterPage() {
           ></lottie-player>
         </div>
         <div className="col-md-4 ">
-          <form onSubmit={handleSubmit(registerSubmit)}>
-            <div className="register_fields">
-              <div className="register_input">
-                <h2>Register </h2>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  {...register("username")}
-                />
+          <form onSubmit={handleSubmit(loginSubmit)}>
+            <div className="login_fields">
+              <div className="login_input">
+                <h2>Login </h2>
                 <input
                   type="email"
                   placeholder="Email"
@@ -59,8 +56,8 @@ function RegisterPage() {
                   placeholder="Password"
                   {...register("password")}
                 />
-                <button type="submit">Register</button>
-                <Link to="/login">Click Here For Login</Link>
+                <button type="submit">Login</button>
+                <Link to="/register">Click Here For Register</Link>
               </div>
             </div>
           </form>
@@ -68,6 +65,6 @@ function RegisterPage() {
       </div>
     </div>
   );
-}
+};
 
-export default RegisterPage;
+export default LogInPage;

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../component/Layout";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Layout from "../../component/Layout";
+import { db } from "../../utils/firebase";
 
-function HomePage() {
+const HomePage = () => {
   const [product, setProduct] = useState([]);
   const [loader, setLoader] = useState(false);
   const [searchKey, setSearchKey] = useState("");
@@ -108,6 +108,6 @@ function HomePage() {
       </div>
     </Layout>
   );
-}
+};
 
 export default HomePage;
