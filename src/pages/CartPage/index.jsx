@@ -44,10 +44,10 @@ const CartPage = () => {
 
   useEffect(() => {
     let temp = 0;
-    cartItem.forEach((cartItem) => {
-      temp = temp + cartItem.price;
-    });
-    setTotalAmount(temp);
+    let newCartItem=cartItem.reduce((previosCartItem,currentCartItem) => {
+      return previosCartItem+currentCartItem.price
+    },temp);
+    setTotalAmount(newCartItem);
   }, [cartItem]);
 
   useEffect(() => {

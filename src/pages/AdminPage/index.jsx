@@ -166,7 +166,7 @@ const AdminPage = () => {
               }
             />
             <input
-              type="text"
+              type="number"
               placeholder="price"
               value={product.price}
               onChange={(e) =>
