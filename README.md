@@ -10,4 +10,6 @@
 - CSS
   
 ## About
-It is E-commerce app which is help to buy product like any electronics product , mobiles or fashion product etc
+An E-commerce website made using react,firebase and redux to buy,add to cart , remove from cart etc features
+
+[Live Preview](https://fire-commerce.vercel.app)
