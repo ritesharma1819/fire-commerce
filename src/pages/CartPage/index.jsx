@@ -44,9 +44,9 @@ const CartPage = () => {
 
   useEffect(() => {
     let temp = 0;
-    let newCartItem=cartItem.reduce((previosCartItem,currentCartItem) => {
-      return previosCartItem+currentCartItem.price
-    },temp);
+    let newCartItem = cartItem.reduce((previosCartItem, currentCartItem) => {
+      return previosCartItem + currentCartItem.price;
+    }, temp);
     setTotalAmount(newCartItem);
   }, [cartItem]);
 
